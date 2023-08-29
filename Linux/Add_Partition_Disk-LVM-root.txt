@@ -1,0 +1,329 @@
+Xshell for Xmanager Enterprise 5 (Build 1015)
+Copyright (c) 2002-2016 NetSarang Computer, Inc. All rights reserved.
+
+Type `help' to learn how to use Xshell prompt.
+[c:\~]$ 
+
+Connecting to 192.168.56.118:22...
+Connection established.
+To escape to local shell, press 'Ctrl+Alt+]'.
+
+Last login: Thu Jul 28 11:02:19 2022 from 192.168.56.10
+[oracle@modus ~]$ su -
+Password: 
+Last login: Thu Jul 28 10:56:24 WIB 2022 on pts/0
+[root@modus ~]# fdisk -l
+
+Disk /dev/sda: 42.9 GB, 42949672960 bytes, 83886080 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000f05d1
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048     1026047      512000   83  Linux
+/dev/sda2         1026048    83886079    41430016   8e  Linux LVM
+
+Disk /dev/sdb: 53.7 GB, 53687091200 bytes, 104857600 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/rhel-root: 38.2 GB, 38214303744 bytes, 74637312 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/rhel-swap: 4160 MB, 4160749568 bytes, 8126464 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+[root@modus ~]# lsblk
+NAME          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda             8:0    0   40G  0 disk 
+├─sda1          8:1    0  500M  0 part /boot
+└─sda2          8:2    0 39.5G  0 part 
+  ├─rhel-root 253:0    0 35.6G  0 lvm  /
+  └─rhel-swap 253:1    0  3.9G  0 lvm  [SWAP]
+sdb             8:16   0   50G  0 disk 
+sr0            11:0    1 1024M  0 rom  
+[root@modus ~]# df -Th /u01
+Filesystem            Type  Size  Used Avail Use% Mounted on
+/dev/mapper/rhel-root xfs    36G   31G  5.0G  87% /
+[root@modus ~]# 
+[root@modus ~]# fdisk /dev/sdb
+Welcome to fdisk (util-linux 2.23.2).
+
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0x83ebb6c3.
+
+Command (m for help): d
+No partition is defined yet!
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1): 
+First sector (2048-104857599, default 2048): 
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-104857599, default 104857599): 
+Using default value 104857599
+Partition 1 of type Linux and of size 50 GiB is set
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+[root@modus ~]# 
+[root@modus ~]# 
+[root@modus ~]# cd /
+[root@modus /]# 
+[root@modus /]# 
+[root@modus /]# xfs_grows u01
+bash: xfs_grows: command not found...
+[root@modus /]# cd
+[root@modus ~]# 
+[root@modus ~]# cd /
+[root@modus /]# 
+[root@modus /]# 
+[root@modus /]# xfs_growfs u01
+meta-data=/dev/mapper/rhel-root  isize=256    agcount=4, agsize=2332416 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=0        finobt=0
+data     =                       bsize=4096   blocks=9329664, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=0
+log      =internal               bsize=4096   blocks=4555, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+[root@modus /]# 
+[root@modus /]# cd
+[root@modus ~]# fdisk -l /dev/sdb
+
+Disk /dev/sdb: 53.7 GB, 53687091200 bytes, 104857600 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x83ebb6c3
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1            2048   104857599    52427776   83  Linux
+[root@modus ~]# 
+[root@modus ~]# cd /
+[root@modus /]# xfs_growfs u01
+meta-data=/dev/mapper/rhel-root  isize=256    agcount=4, agsize=2332416 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=0        finobt=0
+data     =                       bsize=4096   blocks=9329664, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=0
+log      =internal               bsize=4096   blocks=4555, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+[root@modus /]# 
+[root@modus /]# 
+[root@modus /]# xfs_info u01
+meta-data=/dev/mapper/rhel-root  isize=256    agcount=4, agsize=2332416 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=0        finobt=0
+data     =                       bsize=4096   blocks=9329664, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=0
+log      =internal               bsize=4096   blocks=4555, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+[root@modus /]# ls blk
+ls: cannot access blk: No such file or directory
+[root@modus /]# lsblk
+NAME          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda             8:0    0   40G  0 disk 
+├─sda1          8:1    0  500M  0 part /boot
+└─sda2          8:2    0 39.5G  0 part 
+  ├─rhel-root 253:0    0 35.6G  0 lvm  /
+  └─rhel-swap 253:1    0  3.9G  0 lvm  [SWAP]
+sdb             8:16   0   50G  0 disk 
+└─sdb1          8:17   0   50G  0 part 
+sr0            11:0    1 1024M  0 rom  
+[root@modus /]# df -h
+Filesystem             Size  Used Avail Use% Mounted on
+/dev/mapper/rhel-root   36G   31G  5.0G  86% /
+devtmpfs               1.9G     0  1.9G   0% /dev
+tmpfs                  1.9G   84K  1.9G   1% /dev/shm
+tmpfs                  1.9G  8.8M  1.9G   1% /run
+tmpfs                  1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sda1              497M  157M  340M  32% /boot
+tmpfs                  380M   16K  380M   1% /run/user/42
+tmpfs                  380M     0  380M   0% /run/user/1001
+[root@modus /]# pvdisplay
+  --- Physical volume ---
+  PV Name               /dev/sda2
+  VG Name               rhel
+  PV Size               39.51 GiB / not usable 3.00 MiB
+  Allocatable           yes 
+  PE Size               4.00 MiB
+  Total PE              10114
+  Free PE               11
+  Allocated PE          10103
+  PV UUID               TLbQwL-OkUX-Vfq4-p6hr-8kot-wyPe-Q5CARq
+   
+[root@modus /]# pvcreate /dev/sdb1
+  Physical volume "/dev/sdb1" successfully created
+[root@modus /]# pvdisplay
+  --- Physical volume ---
+  PV Name               /dev/sda2
+  VG Name               rhel
+  PV Size               39.51 GiB / not usable 3.00 MiB
+  Allocatable           yes 
+  PE Size               4.00 MiB
+  Total PE              10114
+  Free PE               11
+  Allocated PE          10103
+  PV UUID               TLbQwL-OkUX-Vfq4-p6hr-8kot-wyPe-Q5CARq
+   
+  "/dev/sdb1" is a new physical volume of "50.00 GiB"
+  --- NEW Physical volume ---
+  PV Name               /dev/sdb1
+  VG Name               
+  PV Size               50.00 GiB
+  Allocatable           NO
+  PE Size               0   
+  Total PE              0
+  Free PE               0
+  Allocated PE          0
+  PV UUID               D3KeN6-L1UC-nnPo-4HCz-GeGA-GAM8-pv8kC9
+   
+[root@modus /]# 
+[root@modus /]# 
+[root@modus /]# vgextend rhel /dev/sdb1
+  Volume group "rhel" successfully extended
+[root@modus /]# 
+[root@modus /]# lvdisplay
+  --- Logical volume ---
+  LV Path                /dev/rhel/swap
+  LV Name                swap
+  VG Name                rhel
+  LV UUID                qqJykz-pdfE-83ae-2m7y-f8vN-zPvu-OUdmHt
+  LV Write Access        read/write
+  LV Creation host, time modus, 2021-08-10 11:42:33 +0700
+  LV Status              available
+  # open                 2
+  LV Size                3.88 GiB
+  Current LE             992
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     8192
+  Block device           253:1
+   
+  --- Logical volume ---
+  LV Path                /dev/rhel/root
+  LV Name                root
+  VG Name                rhel
+  LV UUID                YNdE3h-SMDF-C2qQ-n2fW-5nH8-KTMd-zER472
+  LV Write Access        read/write
+  LV Creation host, time modus, 2021-08-10 11:42:33 +0700
+  LV Status              available
+  # open                 1
+  LV Size                35.59 GiB
+  Current LE             9111
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     8192
+  Block device           253:0
+   
+[root@modus /]# df -h
+Filesystem             Size  Used Avail Use% Mounted on
+/dev/mapper/rhel-root   36G   31G  5.0G  86% /
+devtmpfs               1.9G     0  1.9G   0% /dev
+tmpfs                  1.9G   84K  1.9G   1% /dev/shm
+tmpfs                  1.9G  8.8M  1.9G   1% /run
+tmpfs                  1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sda1              497M  157M  340M  32% /boot
+tmpfs                  380M   16K  380M   1% /run/user/42
+tmpfs                  380M     0  380M   0% /run/user/1001
+[root@modus /]# 
+[root@modus /]# lvextend --size +50G --resizefs /dev/rhel/root
+  Size of logical volume rhel/root changed from 35.59 GiB (9111 extents) to 85.59 GiB (21911 extents).
+  Logical volume root successfully resized.
+meta-data=/dev/mapper/rhel-root  isize=256    agcount=4, agsize=2332416 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=0        finobt=0
+data     =                       bsize=4096   blocks=9329664, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=0
+log      =internal               bsize=4096   blocks=4555, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data blocks changed from 9329664 to 22436864
+[root@modus /]# 
+[root@modus /]# df -h
+Filesystem             Size  Used Avail Use% Mounted on
+/dev/mapper/rhel-root   86G   31G   55G  36% /
+devtmpfs               1.9G     0  1.9G   0% /dev
+tmpfs                  1.9G   84K  1.9G   1% /dev/shm
+tmpfs                  1.9G  8.8M  1.9G   1% /run
+tmpfs                  1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sda1              497M  157M  340M  32% /boot
+tmpfs                  380M   16K  380M   1% /run/user/42
+tmpfs                  380M     0  380M   0% /run/user/1001
+[root@modus /]# lsblk
+NAME          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda             8:0    0   40G  0 disk 
+├─sda1          8:1    0  500M  0 part /boot
+└─sda2          8:2    0 39.5G  0 part 
+  ├─rhel-root 253:0    0 85.6G  0 lvm  /
+  └─rhel-swap 253:1    0  3.9G  0 lvm  [SWAP]
+sdb             8:16   0   50G  0 disk 
+└─sdb1          8:17   0   50G  0 part 
+  └─rhel-root 253:0    0 85.6G  0 lvm  /
+sr0            11:0    1 1024M  0 rom  
+[root@modus /]# shutdown -r now
+PolicyKit daemon disconnected from the bus.
+We are no longer a registered authentication agent.
+
+Connection closed by foreign host.
+
+Disconnected from remote host(Modus) at 11:24:29.
+
+Type `help' to learn how to use Xshell prompt.
+[c:\~]$ 
+
+Connecting to 192.168.56.118:22...
+Connection established.
+To escape to local shell, press 'Ctrl+Alt+]'.
+
+Last login: Thu Jul 28 11:02:27 2022 from 192.168.56.10
+[oracle@modus ~]$ df -h
+Filesystem             Size  Used Avail Use% Mounted on
+/dev/mapper/rhel-root   86G   31G   55G  36% /
+devtmpfs               1.9G     0  1.9G   0% /dev
+tmpfs                  1.9G   84K  1.9G   1% /dev/shm
+tmpfs                  1.9G  8.8M  1.9G   1% /run
+tmpfs                  1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sda1              497M  157M  340M  32% /boot
+tmpfs                  380M   12K  380M   1% /run/user/42
+tmpfs                  380M     0  380M   0% /run/user/1001
+[oracle@modus ~]$ cd installer/
+[oracle@modus installer]$ ls -ltrh
+total 4.0K
+drwxr-xr-x. 7 oracle oinstall 4.0K Jul  7  2014 database
+drwxr-xr-x. 2 oracle oinstall   80 Mar 28 11:13 ahf
+[oracle@modus installer]$ mkdir em
+[oracle@modus installer]$ ls -ltrh
+total 4.0K
+drwxr-xr-x. 7 oracle oinstall 4.0K Jul  7  2014 database
+drwxr-xr-x. 2 oracle oinstall   80 Mar 28 11:13 ahf
+drwxr-xr-x. 2 oracle oinstall    6 Jul 28 11:25 em
+[oracle@modus installer]$ 
